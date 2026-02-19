@@ -22,7 +22,6 @@ export const App: React.FC = () => {
   useEffect(() => {
     getTodos()
       .then(data => setToDos(data))
-      .catch(err => console.error(err))
       .finally(() => setShowLoader(false));
   }, []);
 
