@@ -19,6 +19,13 @@ export const App: React.FC = () => {
 
   const closeModal = () => setSelectedTodo(null);
 
+  useEffect(() => {
+    getTodos()
+      .then(data => setToDos(data))
+      .catch(err => console.error(err))
+      .finally(() => setShowLoader(false));
+  }, []);
+
   const visibleTodos = toDos.filter(todo => {
     const matchesQuery = todo.title.toLowerCase().includes(query.toLowerCase());
     const matchesStatus =
@@ -29,30 +36,12 @@ export const App: React.FC = () => {
     return matchesQuery && matchesStatus;
   });
 
-  useEffect(() => {
-    const startTodos = async () => {
-      try {
-        const data = await getTodos();
-
-        setToDos(data);
-        setShowLoader(false);
-      } catch (error) {
-        setShowLoader(false);
-      } finally {
-        setShowLoader(false);
-      }
-    };
-
-    startTodos();
-  }, []);
-
   return (
     <>
       <div className="section">
         <div className="container">
           <div className="box">
             <h1 className="title">Todos:</h1>
-
             <div className="block">
               <TodoFilter
                 query={query}
@@ -61,7 +50,6 @@ export const App: React.FC = () => {
                 setStatus={setStatus}
               />
             </div>
-
             <div className="block">
               {showLoader ? (
                 <Loader />
