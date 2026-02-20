@@ -43,6 +43,7 @@ export const TodoModal: React.FC<Props> = ({ selectedTodo, closeModal }) => {
               type="button"
               className="delete"
               data-cy="modal-close"
+              aria-label="Close modal"
               onClick={() => closeModal()}
             />
           </header>
@@ -58,7 +59,7 @@ export const TodoModal: React.FC<Props> = ({ selectedTodo, closeModal }) => {
 
               {' by '}
 
-              <a href={`mailto:${user?.email}`}>{user?.name}</a>
+              <a href={`mailto:${user.email}`}>{user.name}</a>
             </p>
           </div>
         </div>

@@ -1,10 +1,11 @@
+import React from 'react';
+
 type Props = {
   query: string;
   setQuery: (val: string) => void;
   status: string;
   setStatus: (val: string) => void;
 };
-
 export const TodoFilter: React.FC<Props> = ({
   query,
   setQuery,
@@ -42,16 +43,13 @@ export const TodoFilter: React.FC<Props> = ({
       </span>
 
       <span className="icon is-right" style={{ pointerEvents: 'all' }}>
-        {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
-        {query &&
-        <button
-          data-cy="clearSearchButton"
-          type="button"
-          className="delete"
-          aria-label="Clear search"
-          onClick={() => setQuery('')}
-        />
-        }
+          <button
+            data-cy="clearSearchButton"
+            type="button"
+            className={query ? "delete" : "is-hidden"}
+            aria-label="Clear search"
+            onClick={() => setQuery('')}
+          />
       </span>
     </p>
   </form>
